@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Loader = () => {
   return (
-    <div>Loader</div>
-  )
-}
+    <div className="flex justify-center items-center py-3">
+      <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-400" />
+    </div>
+  );
+};
 
-export default Loader
+export default Loader;
