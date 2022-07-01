@@ -13,7 +13,7 @@ contract Transactions {
         uint256 timestamp,
         string keyword
     );
-    // Criando um evento, semelhante a uma função, contendo os parametros e seus tipos
+    // Criando um evento, semelhante a uma função, contendo os parametros e seus tipos, esse evento será responsável por realizar a transferência
 
     struct TransferStruct {
         address sender;
@@ -34,16 +34,22 @@ contract Transactions {
         // Irá incrementar a cada transação realizada
 
         transactions.push(TransferStruct(msg.sender, receiver, amount, message, block.timestamp, keyword));
-        // Adicionando o objeto dentro do array contendo os atributos que serão recebidos
+        // Adicionando e armazenando o objeto dentro do array contendo os atributos que serão recebidos
         // msg.sender -> recebe imediandamente quando se chama uma função específica na blockchain
+        // block.timestamp -> recebe o timestamp do bloco específico
+
+        emit Transfer(msg.sender, receiver, amount, message, block.timestamp, keyword);
+        // Executando a transferência
     }
 
     // memory = armazenamento temporário
     function getAllTransactions () public view returns (TransferStruct[] memory) {
         // Irá retornar o array de transactions
+        return transactions;
     }
 
     function getTransactionCount() public view returns (uint256) {
         // Irá retornar um contador transactionCount
+        return transactionCounter;
     }
 }
