@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 import { Loader } from "./";
+
+import { TransactionContext } from '../context/TransactionContext'
 
 const defaultStyles =
   "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
@@ -20,7 +22,7 @@ const Input = ({ placeholder, type, name, value, handleChange }) => (
 );
 
 const Welcome = () => {
-  const connectWallet = () => {};
+  const { connectWallet, currentAccount } = useContext(TransactionContext)
 
   const handleSubmit = () => {};
 
@@ -35,6 +37,7 @@ const Welcome = () => {
             Descubra o mundo das criptomoedas. Compre e venda cropto de maneira
             fácil na Super Krypt.
           </p>
+          {!currentAccount && (
           <button
             type="button"
             onClick={connectWallet}
@@ -43,7 +46,7 @@ const Welcome = () => {
             <p className="text-white text-base font-semibold">
               Conectar Carteira
             </p>
-          </button>
+          </button>)}
 
           <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
             <div className={`rounded-tl-2xl ${defaultStyles}`}>
@@ -82,7 +85,7 @@ const Welcome = () => {
             <Input placeholder="Mensagem" name="message" type="text" handleChange={() => {}}/>
             <div className="h-[1px] w-full bg-blue-700 my-2"/>
 
-            { true ? (
+            { false ? (
               <Loader />
             ) : (
               <button type="button" onClick={handleSubmit} className="text-white w-full mt-2 border-[1px] p-2 border-[#1548DB] rounded-full cursor-pointer">
