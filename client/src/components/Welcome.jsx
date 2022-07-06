@@ -6,7 +6,7 @@ import { Loader } from "./";
 
 import { TransactionContext } from '../context/TransactionContext'
 
-import { shortAddress } from "../utils/shortAddrenss";
+import { shortAddress } from "../utils/shortAddress";
 
 const defaultStyles =
   "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
@@ -24,7 +24,7 @@ const Input = ({ placeholder, type, name, value, handleChange }) => (
 );
 
 const Welcome = () => {
-  const { connectWallet, currentAccount, formData, sendTransaction, handleChange } = useContext(TransactionContext)
+  const { connectWallet, currentAccount, formData, sendTransaction, handleChange, isLoading } = useContext(TransactionContext)
 
   const handleSubmit = (event) => {
     const { addressTo, amount, keyword, message } = formData;
@@ -95,7 +95,7 @@ const Welcome = () => {
             <Input placeholder="Mensagem" name="message" type="text" handleChange={handleChange}/>
             <div className="h-[1px] w-full bg-blue-700 my-2"/>
 
-            { false ? (
+            { isLoading ? (
               <Loader />
             ) : (
               <button type="button" onClick={handleSubmit} className="text-white w-full mt-2 border-[1px] p-2 border-[#1548DB] rounded-full cursor-pointer">
